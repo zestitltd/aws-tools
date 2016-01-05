@@ -87,16 +87,19 @@ for region in $REGIONS ; do
         ;;
         INSTANCE)
             search_by_regexp INSTANCE_ID "$instance_line" "^i-"
-            search_by_regexp AMI_ID "$instance_line" "^ami-"
-            search_by_regexp PUBLIC_DNS "$instance_line" "^ec2-"
-            search_by_regexp PRIVATE_DNS "$instance_line" "^ip-"
-            search_by_regexp SSH_KEY "$instance_line" "-key$"
-            search_by_regexp START_TIME "$instance_line" "$DATE_REGEXP"
-            TYPE="`ec2-describe-instance-attribute -t i-44110d33 | awk '{ print $3}'`"
-            IFS=$' '
-            for status in $INSTANCE_POSSIBLE_STATUS ; do
-                search_by_regexp STATUS "$instance_line" "$status"
-            done
+            if [ ! -z "$INSTANCE_ID" ] ; then
+              echo $INSTANCE_ID
+            fi
+#            search_by_regexp AMI_ID "$instance_line" "^ami-"
+#            search_by_regexp PUBLIC_DNS "$instance_line" "^ec2-"
+#            search_by_regexp PRIVATE_DNS "$instance_line" "^ip-"
+#            search_by_regexp SSH_KEY "$instance_line" "-key$"
+#            search_by_regexp START_TIME "$instance_line" "$DATE_REGEXP"
+#            TYPE="`ec2-describe-instance-attribute -t i-44110d33 | awk '{ print $3}'`"
+#            IFS=$' '
+#            for status in $INSTANCE_POSSIBLE_STATUS ; do
+#                search_by_regexp STATUS "$instance_line" "$status"
+#            done
         ;;
         BLOCKDEVICE)
         ;;
