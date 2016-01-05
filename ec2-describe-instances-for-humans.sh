@@ -78,13 +78,13 @@ for region in $REGIONS ; do
     for instance_line in `ec2-describe-instances --region "$region"`; do
         line_type=`echo "$instance_line" | cut -f1`
         case "$line_type" in
-        RESERVATION)
-            if [ ! -z "$INSTANCE_ID" ] ; then
-                print_current_instance_info
-                clean_instance_info
-            fi
-            search_by_regexp RESERVATION_ID "$instance_line" "^r-"
-        ;;
+#        RESERVATION)
+#            if [ ! -z "$INSTANCE_ID" ] ; then
+#                print_current_instance_info
+#                clean_instance_info
+#            fi
+#            search_by_regexp RESERVATION_ID "$instance_line" "^r-"
+#        ;;
         INSTANCE)
             search_by_regexp INSTANCE_ID "$instance_line" "^i-"
             if [ ! -z "$INSTANCE_ID" ] ; then
@@ -101,10 +101,10 @@ for region in $REGIONS ; do
 #                search_by_regexp STATUS "$instance_line" "$status"
 #            done
         ;;
-        BLOCKDEVICE)
-        ;;
-        TAG)
-        ;;
+#        BLOCKDEVICE)
+#        ;;
+#        TAG)
+#        ;;
         esac
     done
 done
